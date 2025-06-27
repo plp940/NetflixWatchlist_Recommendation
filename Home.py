@@ -39,10 +39,21 @@ st.title("🎬 Netflix Explorer")
 col1, col2 = st.columns(2)
 col1.metric("Total Titles", len(df))
 col2.metric("Filtered Titles", len(filtered_df))
+# Recommendation Section
+st.subheader("📽️ You May Also Like")
+st.write("Explore similar titles based on your selected filters slider.")
+selected_title = st.selectbox("Pick a Title to Explore Similar Ones:", filtered_df['title'].unique())
+
+selected_genre = df[df['title'] == selected_title]['listed_in'].values[0]
+recommended = df[df['listed_in'].str.contains(selected_genre, na=False)]
+recommended = recommended[recommended['title'] != selected_title]
+
+st.write(recommended[['title', 'type', 'country', 'release_year']].head(10))
+
 
 # Visualization Section
 st.subheader("📊 Visual Insights")
-
+st.write("Explore the distribution of Netflix titles based on various attributes you have selected in the filters slider.")
 col3, col4, col5 = st.columns(3)
 
 # Type Distribution
@@ -78,13 +89,3 @@ with col5:
         st.info("'year_added' column not available.")
 
 
-
-# Recommendation Section
-st.subheader("📽️ You May Also Like")
-selected_title = st.selectbox("Pick a Title to Explore Similar Ones:", filtered_df['title'].unique())
-
-selected_genre = df[df['title'] == selected_title]['listed_in'].values[0]
-recommended = df[df['listed_in'].str.contains(selected_genre, na=False)]
-recommended = recommended[recommended['title'] != selected_title]
-
-st.write(recommended[['title', 'type', 'country', 'release_year']].head(10))
