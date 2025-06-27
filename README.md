@@ -31,9 +31,11 @@ Use the “Page” box to explore more results in batches of 10.
 ### 📥 Installation
 
 1. Clone or download this repo:
-   ```bash
-   git clone https://github.com/yourusername/netflix-explorer.git
-   cd netflix-explorer
+ ```bash
+
+  git clone https://github.com/plp940/NetflixWatchlist_Recommendation.git
+ 
+   ```
 Create a virtual environment (optional but recommended):
 
 ```bash
